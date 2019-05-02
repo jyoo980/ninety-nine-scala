@@ -10,29 +10,38 @@ class BinarySearchTree {
 
   def has(i: Int): Boolean = {
     @tailrec
-    def _has(target: Int, currNode: Option[Node]): Boolean =
-      currNode match {
-        case None => false
-        case Some(node) if node.key == target => true
-        case Some(node) if target < node.key  => _has(target, node.left)
-        case Some(node)                       => _has(target, node.right)
-      }
+    def _has(target: Int, currNode: Option[Node]): Boolean = currNode match {
+      case None => false
+      case Some(node) if node.key == target => true
+      case Some(node) if target < node.key  => _has(target, node.left)
+      case Some(node)                       => _has(target, node.right)
+    }
     _has(i, this.root)
   }
 
-  def inOrder(root: Option[Node]): Unit = {
-    root match {
-      case None =>
-      case Some(node) =>
-        inOrder(node.left)
-        println("Node value: " + node.key)
-        inOrder(node.right)
-    }
+  def inOrder(root: Option[Node]): Unit = root match {
+    case None =>
+    case Some(node) =>
+      inOrder(node.left)
+      println("Node value: " + node.key)
+      inOrder(node.right)
   }
 
+  def preOrder(root: Option[Node]): Unit = root match {
+    case None =>
+    case Some(node) =>
+      println("Node value: " + node.key)
+      preOrder(node.left)
+      preOrder(node.right)
+  }
 
-
-
+  def postOrder(root: Option[Node]): Unit = root match {
+    case None =>
+    case Some(node) =>
+      postOrder(node.left)
+      postOrder(node.right)
+      println("Node value: " + node.key)
+  }
 
 }
 
